@@ -1,0 +1,323 @@
+/* ==========================================================================
+   CUBE CSS ARCHITECTURE
+   Composition → Utility → Block → Exception
+   ========================================================================== */
+
+/* ==========================================================================
+   GLOBAL STYLES & RESET
+   ========================================================================== */
+
+/* Modern CSS Reset */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+* {
+  margin: 0;
+}
+
+body {
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  overflow-wrap: break-word;
+}
+
+/* ==========================================================================
+   DESIGN TOKENS
+   ========================================================================== */
+
+:root {
+  /* Colors */
+  --color-primary: hsl(47, 88%, 63%);
+  --color-white: hsl(0, 0%, 100%);
+  --color-gray-500: hsl(0, 0%, 42%);
+  --color-gray-950: hsl(0, 0%, 7%);
+  
+  /* Typography */
+  --font-family: 'Figtree', sans-serif;
+  --font-weight-medium: 500;
+  --font-weight-extrabold: 800;
+  
+  /* Text sizes */
+  --text-size-body: 1rem;
+  --text-size-small: 0.875rem;
+  --text-size-large: 1.5rem;
+  
+  /* Spacing scale from Style Guide */
+  --space-50: 0.25rem;   /* 4px */
+  --space-100: 0.5rem;   /* 8px */
+  --space-150: 0.75rem;  /* 12px */
+  --space-200: 1rem;     /* 16px - From Figma */
+  --space-300: 1.5rem;   /* 24px */
+  
+  /* Legacy spacing for compatibility */
+  --space-3xs: var(--space-50);
+  --space-2xs: var(--space-100); 
+  --space-xs: var(--space-150);
+  --space-s: var(--space-200);
+  --space-m: var(--space-300);
+  --space-l: 2rem;       /* 32px */
+  --space-xl: 3rem;      /* 48px */
+  --space-2xl: 4rem;     /* 64px */
+  --space-3xl: 6rem;     /* 96px */
+  
+  /* Border radius */
+  --radius-s: 0.5rem;    /* 8px */
+  --radius-m: 0.625rem;  /* 10px */
+  --radius-l: 1.25rem;   /* 20px */
+  
+  /* Shadows */
+  --shadow-card: 8px 8px 0px 0px var(--color-gray-950);
+  
+  /* Transitions */
+  --transition-base: 200ms ease-in-out;
+}
+
+/* ==========================================================================
+   COMPOSITION PATTERNS (Every Layout)
+   ========================================================================== */
+
+/* The Stack - vertical rhythm */
+.flow > * + * {
+  margin-top: var(--flow-space, 1em);
+}
+
+/* The Center - centering content */
+.center {
+  box-sizing: content-box;
+  margin-inline: auto;
+  max-inline-size: var(--measure, 60ch);
+  padding-inline-start: var(--gutter, var(--space-s));
+  padding-inline-end: var(--gutter, var(--space-s));
+}
+
+/* The Box - consistent internal spacing */
+.box {
+  padding: var(--box-padding, var(--space-m));
+  border: var(--box-border-width, 1px) solid;
+  border-color: var(--box-border-color, var(--color-gray-950));
+  border-radius: var(--box-border-radius, var(--radius-l));
+}
+
+/* The Cluster - horizontal grouping */
+.cluster {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--cluster-space, var(--space-s));
+  justify-content: var(--cluster-horizontal-alignment, flex-start);
+  align-items: var(--cluster-vertical-alignment, center);
+}
+
+/* ==========================================================================
+   UTILITY CLASSES
+   ========================================================================== */
+
+/* Color utilities */
+.bg-primary {
+  background-color: var(--color-primary);
+}
+
+.bg-white {
+  background-color: var(--color-white);
+}
+
+.color-dark {
+  color: var(--color-gray-950);
+}
+
+.color-secondary {
+  color: var(--color-gray-500);
+}
+
+.color-primary {
+  color: var(--color-primary);
+}
+
+/* Typography utilities */
+.text-large {
+  font-size: var(--text-size-large);
+  font-weight: var(--font-weight-extrabold);
+  line-height: 1.2;
+}
+
+.text-small {
+  font-size: var(--text-size-small);
+}
+
+.font-bold {
+  font-weight: var(--font-weight-extrabold);
+}
+
+.font-medium {
+  font-weight: var(--font-weight-medium);
+}
+
+/* ==========================================================================
+   BASE STYLES
+   ========================================================================== */
+
+body {
+  font-family: var(--font-family);
+  font-size: var(--text-size-body);
+  font-weight: var(--font-weight-medium);
+  background-color: var(--color-primary);
+  min-height: 100vh;
+}
+
+/* ==========================================================================
+   BLOCK STYLES
+   ========================================================================== */
+
+/* Page layout */
+.page {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding-block: var(--space-m);
+  --measure: 24rem;
+}
+
+/* Blog card component */
+.blog-card {
+  background-color: var(--color-white);
+  box-shadow: var(--shadow-card);
+  transition: transform var(--transition-base), box-shadow var(--transition-base);
+  --flow-space: var(--space-200);  /* Article children: 16px from Figma */
+  --box-padding: var(--space-300);
+  max-width: 24rem;
+}
+
+.blog-card__image {
+  width: 100%;
+  height: auto;
+  border-radius: var(--radius-m);
+}
+
+.blog-card__content {
+  --flow-space: var(--space-150);  /* Content children: 12px from Style Guide */
+}
+
+/* .blog-card__meta - no longer needs cluster styles */
+
+.blog-card__date {
+  font-size: var(--text-size-small);
+}
+
+.blog-card__title {
+  font-size: var(--text-size-large);
+  font-weight: var(--font-weight-extrabold);
+  line-height: 1.2;
+}
+
+.blog-card__description {
+  line-height: 1.5;
+}
+
+.blog-card__author {
+  --cluster-space: var(--space-150);
+}
+
+.blog-card__link {
+  color: inherit;
+  text-decoration: none;
+}
+
+.blog-card__link:where(:hover, :focus-visible) {
+  color: var(--color-primary);
+}
+
+/* Badge component */
+.badge {
+  display: inline-block;
+  padding: var(--space-3xs) var(--space-xs);
+  border-radius: var(--radius-s);
+  font-size: var(--text-size-small);
+  font-weight: var(--font-weight-extrabold);
+}
+
+/* Author avatar */
+.author-avatar {
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+}
+
+.author-name {
+  font-weight: var(--font-weight-extrabold);
+  font-size: var(--text-size-small);
+}
+
+/* Attribution */
+.attribution {
+  position: absolute;
+  bottom: var(--space-s);
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: var(--text-size-small);
+  text-align: center;
+  --cluster-horizontal-alignment: center;
+}
+
+.attribution a {
+  color: var(--color-gray-950);
+  font-weight: var(--font-weight-extrabold);
+}
+
+.attribution a:where(:hover, :focus-visible) {
+  color: var(--color-white);
+}
+
+/* ==========================================================================
+   EXCEPTIONS (State-based modifications)
+   ========================================================================== */
+
+/* Interactive states */
+.blog-card:where(:hover, :focus-within) {
+  transform: translateY(-2px);
+  box-shadow: 12px 12px 0px 0px var(--color-gray-950);
+}
+
+/* Focus management */
+.blog-card__link:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+  border-radius: var(--radius-s);
+}
+
+/* Reduced motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
