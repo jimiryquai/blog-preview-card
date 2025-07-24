@@ -223,8 +223,6 @@ Areas I want to continue focusing on in future projects:
 
 **Balancing methodology strictness with pragmatism**: Sometimes CUBE CSS or Every Layout patterns felt like overkill for simple elements. Learning when to apply patterns versus when simplicity wins was an ongoing challenge.
 
-**Intrinsic responsiveness learning curve**: Moving away from media queries required rethinking how responsive design works. Functions like `clamp()` and `min()` are powerful but take practice to use effectively.
-
 **Learning intrinsic responsiveness**: Moving away from media queries required rethinking how responsive design works. Functions like `clamp()` and `min()` are powerful but take practice to use effectively.
 
 **Browser testing without traditional breakpoints**: Testing responsive behavior required a different approach since there weren't specific breakpoints to validate.
