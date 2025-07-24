@@ -221,13 +221,14 @@ body {
 }
 
 .blog-card__content {
-  --flow-space: var(--space-150);  /* Content children: 12px from Style Guide */
+  --flow-space: var(--space-200);  /* Content children: 16px for better visual separation */
 }
 
 /* .blog-card__meta - no longer needs cluster styles */
 
 .blog-card__date {
   font-size: var(--text-size-small);
+  display: inline-block;
 }
 
 .blog-card__title {
