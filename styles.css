@@ -19,6 +19,11 @@
 }
 
 body {
+  font-family: var(--font-family);
+  font-size: var(--text-size-body);
+  font-weight: var(--font-weight-medium);
+  background-color: var(--color-primary);
+  min-height: 100vh;
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
 }
@@ -183,13 +188,6 @@ h6 {
    BASE STYLES
    ========================================================================== */
 
-body {
-  font-family: var(--font-family);
-  font-size: var(--text-size-body);
-  font-weight: var(--font-weight-medium);
-  background-color: var(--color-primary);
-  min-height: 100vh;
-}
 
 /* ==========================================================================
    BLOCK STYLES
